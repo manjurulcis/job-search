@@ -54,40 +54,6 @@ services:
     networks:
       - app-network
 
-  composer:
-    build:
-      context: .
-      dockerfile: composer.dockerfile
-    container_name: composer
-    volumes:
-      - ./:/var/www
-    depends_on:
-      - app
-    networks:
-      - app-network
-    entrypoint: ['composer', '--ignore-platform-reqs']
-
-  npm:
-    image: node:13.7
-    container_name: npm
-    volumes:
-      - ./:/var/www
-    working_dir: /var/www
-    entrypoint: ['npm']
-
-  artisan:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: artisan
-    volumes:
-      - ./:/var/www
-    depends_on:
-      - db
-    entrypoint: ['php', '/var/www/artisan']
-    networks:
-      - app-network  
-
 #Docker Networks
 networks:
   app-network:
