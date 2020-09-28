@@ -15,6 +15,10 @@ class CreateJobTable extends Migration
     {
         Schema::create('job', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->string('company');
+            $table->string('reference')->unique();
             $table->timestamps();
         });
     }
