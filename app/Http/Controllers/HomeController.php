@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Job;
 
 class HomeController extends Controller
 {
     /**
-    * Show the profile for the given user.
+    * Show all the jobs
     *
-    * @param  int  $id
     * @return View
     */
-    public function show($id)
+    public function index()
     {
-        return view('user.profile', ['user' => User::findOrFail($id)]);
+        $jobs = Job::all();
+        return view('home', ['jobs' => $jobs]);
     }
 }

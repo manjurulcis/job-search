@@ -22,7 +22,30 @@
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-            This is home
+        <table class="table" id="table">
+
+<thead>
+<tr class="header">
+    <th valign="middle" width="3%">Title</th>
+    <th valign="middle" width="2%">Company Name</th>
+    <th valign="middle" width="2%">Job Description</th>
+    <th valign="middle" width="7%">Release Date</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($jobs as $job)
+        <tr>
+        <td>{{$job->title}}</td>
+        <td>{{$job->company}}</td>
+        <td>{{$job->description}}</td>
+        <td>{{$job->created_at}}</td>
+        </tr>
+    @endforeach
+
+    </tbody>
+
+        </table>
         </div>
     </body>
 </html>
