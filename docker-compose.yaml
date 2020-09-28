@@ -54,6 +54,28 @@ services:
     networks:
       - app-network
 
+  npm:
+    image: node:13.7
+    container_name: npm
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    entrypoint: ['npm']
+
+  artisan:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: artisan
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - app
+      - db
+    entrypoint: ['php', '/var/www/artisan']
+    networks:
+      - app-network  
+
 #Docker Networks
 networks:
   app-network:
