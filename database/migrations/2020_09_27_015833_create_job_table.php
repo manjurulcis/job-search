@@ -19,7 +19,7 @@ class CreateJobTable extends Migration
             $table->string('description');
             $table->string('company');
             $table->string('reference')->unique();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
