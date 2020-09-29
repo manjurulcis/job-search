@@ -37,11 +37,11 @@
             <div class="row">
                 <div class="col-12">
                     <table class="table table-bordered table-hover">
-                        <thead>
-                            <th>ID</th>
-                            <th>Job Title</th>
+                        <thead                            <th>@sortablelink('id', 'Job ID')</th>
+                            <th>@sortablelink('Title', 'Job Title')</th>
                             <th>Description</th>
-                            <th>Company</th>
+                            <th>@sortablelink('company', 'Company Name')</th>
+                            <th>@sortablelink('created_at', 'Published On')</th>
                         </thead>
                         <tbody>
                             @if ($jobs->count() == 0)
@@ -56,6 +56,7 @@
                                 <td>{{ $job->title }}</td>
                                 <td class="text-wrap">{{ $job->description }}</td>
                                 <td class="text-wrap">${{ $job->company }}</td>
+                                <td>{{ $job->created_at }}</td>
                             </tr>
                             @endforeach
                         </tbody>

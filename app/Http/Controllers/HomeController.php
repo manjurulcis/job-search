@@ -14,7 +14,7 @@ class HomeController extends Controller
     */
     public function index()
     {
-        $jobs = Job::paginate(10);
+        $jobs = Job::sortable()->paginate(10);
         return view('jobs', ['jobs' => $jobs]);
     }
 }
