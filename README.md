@@ -1,5 +1,5 @@
 
-# docker-compose-laravel
+# Job Board
 A pretty simplified Docker Compose workflow that sets up a LAMP network of containers for local Laravel development and testing. 
 
 
