@@ -19,11 +19,17 @@
             body {
                 font-family: 'Nunito';
             }
+            form {
+                margin-top: 20px;
+            }
+            input[type='text'] {
+                border: 1px solid #333;
+            }
         </style>
     </head>
     <body class="antialiased">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row mt-25">
                 <div class="col-5">
                     <h1>Available Jobs</h1>
                     <p>
@@ -32,14 +38,18 @@
                 </div>
 
                 <div class="col-7">
-                Search Form
+                <form style="display:inline-block" action="" method="GET">
+                        <input type="text" name="search" maxlength="200">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-primary"> Search</button>
+                </form>
                 </div>
             </div>  
             <div class="row">
                 <div class="col-12">
                     <table class="table table-bordered table-hover">
                         <thead>                            
-                            <th>@sortablelink('id', 'Job ID')</th>
+                            <th>@sortablelink('id', 'ID')</th>
                             <th>@sortablelink('Title', 'Job Title')</th>
                             <th>Description</th>
                             <th>@sortablelink('company', 'Company Name')</th>
@@ -64,7 +74,7 @@
                         </tbody>
                     </table>    
                 </div>
-                {{ $jobs->onEachSide(2)->links() }}
+                {{ $jobs->withQueryString()->onEachSide(2)->links() }}
             </div>   
         </div>
     </body>

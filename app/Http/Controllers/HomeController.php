@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use App\Models\Job;
@@ -15,9 +16,10 @@ class HomeController extends Controller
     *
     * @return View
     */
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = Job::sortable()->paginate(10);
+        $query = $request->input('search');
+        $jobs = $query ? Job::search($query, null, true)->sortable()->paginate(5) : Job::sortable()->paginate(10);
         return view('jobs', ['jobs' => $jobs]);
     }
 
