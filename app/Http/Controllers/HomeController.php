@@ -14,7 +14,7 @@ class HomeController extends Controller
     */
     public function index()
     {
-        $jobs = Job::all();
-        return view('home', ['jobs' => $jobs]);
+        $jobs = Job::paginate(10);
+        return view('jobs', ['jobs' => $jobs]);
     }
 }
