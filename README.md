@@ -5,6 +5,7 @@ A pretty simplified Docker Compose workflow that sets up a LAMP network of conta
 
 ## Usage
 
+After cloning the repo copy environment file from .env.example `cp .env.example .env`
 To get started, make sure you have [Docker installed](https://docs.docker.com/docker-for-mac/install/) on the system, and then clone this repository and spin up the containers for the web server by running `docker-compose up -d --build`.
 
 After that completes following are built for our web server, with their exposed ports detailed:
@@ -12,10 +13,6 @@ After that completes following are built for our web server, with their exposed 
 - **nginx** - `:8080`
 - **mysql** - `:3306`
 - **php** - `:9000`
-
-
-## Create environment file
-Then copy environment file from .env.example `cp .env.example .env`
 
 
 ## Database MIgration
