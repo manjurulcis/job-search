@@ -19,7 +19,7 @@ class Job extends Model
         'title',
         'description',
         'company',
-        'reference'
+        'created_at'
     ];
 
     /**

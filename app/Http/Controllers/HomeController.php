@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 use App\Models\Job;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -16,5 +19,27 @@ class HomeController extends Controller
     {
         $jobs = Job::sortable()->paginate(10);
         return view('jobs', ['jobs' => $jobs]);
+    }
+
+    public function refreshJobs()
+    {
+        $response = Http::get('https://paikat.te-palvelut.fi/tpt-api/tyopaikat?englanti=true');
+
+        if ($response->ok()) {
+
+            $result = $response->json()['response'];
+            $jobs = $result['docs'];
+            
+            foreach($jobs as $job) {
+                DB::table('jobs')->insert([
+                    'title' => $job['otsikko'],
+                    'description' => $job['kuvausteksti'],
+                    'company' => $job['tyonantajanNimi'],
+                    'created_at' => new Carbon($job['ilmoituspaivamaara']),
+                ]);
+            } 
+
+            echo $result['numFound'] . " Jobs found";
+        }
     }
 }

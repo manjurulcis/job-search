@@ -16,9 +16,8 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('company');
-            $table->string('reference')->unique();
             $table->timestamp('created_at')->useCurrent();
         });
     }
