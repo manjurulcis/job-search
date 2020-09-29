@@ -40,8 +40,7 @@ class HomeController extends Controller
                     'created_at' => new Carbon($job['ilmoituspaivamaara']),
                 ]);
             } 
-
-            echo $result['numFound'] . " Jobs found";
         }
+        return redirect()->action([HomeController::class, 'index']);
     }
 }

@@ -58,7 +58,7 @@
                         <tbody>
                             @if ($jobs->count() == 0)
                             <tr>
-                                <td colspan="5">No job to display.</td>
+                                <td colspan="5">No job to display. <a class="btn btn-primary" href="/refreshjobs">Click Here to Refresh Jobs</a></td>
                             </tr>
                             @endif
 
