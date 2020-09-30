@@ -23,6 +23,9 @@ class HomeController extends Controller
         return view('jobs', ['jobs' => $jobs]);
     }
 
+    /**
+     * A simple route to get the job from the API
+     */
     public function refreshJobs()
     {
         $response = Http::get('https://paikat.te-palvelut.fi/tpt-api/tyopaikat?englanti=true');
