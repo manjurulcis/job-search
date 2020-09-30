@@ -32,6 +32,11 @@ Besides these other containers can be accessible using below commands
 - `docker-compose exec app composer install` 
 - `docker-compose exec db bash` 
 
+## Tests
+To run automated test create a sqlite database named 'test.sqlite'
+Run the following command to run tests 
+- `docker-compose exec app composer test` 
+
 ## Future Improvements
 - Add task schedular to get jobs from API periodically
 - Add caching and unit testing(at this point there is no suitable functionality to implement unit tests)
