@@ -36,12 +36,14 @@ class HomeController extends Controller
             $jobs = $result['docs'];
             
             foreach($jobs as $job) {
-                DB::table('jobs')->insert([
+                $job_key_renamed = [
                     'title' => $job['otsikko'],
                     'description' => $job['kuvausteksti'],
                     'company' => $job['tyonantajanNimi'],
                     'created_at' => new Carbon($job['ilmoituspaivamaara']),
-                ]);
+                    'update_at' => new Carbon(now())
+                ];
+                Job::create($job_key_renamed);
             } 
         }
         return redirect()->action([HomeController::class, 'index']);
