@@ -18,7 +18,9 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
-        $jobs = $query ? Job::search($query, null, true)->sortable()->paginate(5) : Job::sortable()->paginate(10);
+        $jobs = $query 
+            ? Job::search($query, null, true)->sortable()->paginate(5) 
+            : Job::sortable()->paginate(10);
         return view('jobs', ['jobs' => $jobs]);
     }
 

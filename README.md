@@ -33,7 +33,7 @@ Besides these other containers can be accessible using below commands
 - `docker-compose exec db bash` 
 
 ## Tests
-To run automated test create a sqlite database named 'test.sqlite'
+To run automated test we will use sqlite db, create an sqlite database named 'test.sqlite' inside database folder `database/test.sqlite` 
 Run the following command to run tests 
 - `docker-compose exec app composer test` 
 

@@ -36,7 +36,7 @@ class Job extends Model
     ];
 
     /**
-    * Searchable rules.
+    * Searchable columns.
     *
     * @var array
     */
