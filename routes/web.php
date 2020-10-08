@@ -15,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/refreshjobs', [HomeController::class, 'refreshJobs']);
+Route::get('/refreshjobs', [HomeController::class, 'refresh_jobs']);
+Route::get('/jobswithvue', [HomeController::class, 'job_list_using_vue']);

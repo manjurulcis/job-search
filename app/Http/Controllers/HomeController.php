@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Job;
 use Carbon\Carbon;
+use Facade\FlareClient\Http\Response;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,7 @@ class HomeController extends Controller
     /**
      * A simple route to get the job from the API
      */
-    public function refreshJobs()
+    public function refresh_jobs()
     {
         $response = Http::get('https://paikat.te-palvelut.fi/tpt-api/tyopaikat?englanti=true');
 
@@ -48,5 +49,13 @@ class HomeController extends Controller
             } 
         }
         return redirect()->action([HomeController::class, 'index']);
+    }
+
+    /**
+     * Job list using vue
+     */
+    public function job_list_using_vue()
+    {
+        return view('jobswithvue', []);
     }
 }

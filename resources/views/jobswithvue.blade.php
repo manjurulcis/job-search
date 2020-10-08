@@ -33,55 +33,6 @@
     </head>
     <body class="antialiased">
         <div id="app"></div>
-        <div class="container-fluid">
-            <div class="row mt-25">
-                <div class="col-5">
-                    <h1>Available Jobs</h1>
-                    <p>
-                        Displaying {{$jobs->count()}} of {{ $jobs->total() }} job(s).
-                    </p>   
-                </div>
-
-                <div class="col-7">
-                <form style="display:inline-block" action="" method="GET">
-                        <input type="text" name="search" maxlength="200">
-                        @csrf
-                        <button type="submit" class="btn btn-sm btn-primary"> Search</button>
-                </form>
-                </div>
-            </div>  
-            <div class="row">
-                <div class="col-12">
-                    <table class="table table-bordered table-hover">
-                        <thead>                            
-                            <th>@sortablelink('id', 'ID')</th>
-                            <th>@sortablelink('Title', 'Job Title')</th>
-                            <th>Description</th>
-                            <th>@sortablelink('company', 'Company Name')</th>
-                            <th>@sortablelink('created_at', 'Published On')</th>
-                        </thead>
-                        <tbody>
-                            @if ($jobs->count() == 0)
-                            <tr>
-                                <td colspan="5">No job to display. <a class="btn btn-primary" href="/refreshjobs">Click Here to Refresh Jobs</a></td>
-                            </tr>
-                            @endif
-
-                            @foreach ($jobs as $job)
-                            <tr>
-                                <td>{{ $job->id }}</td>
-                                <td>{{ $job->title }}</td>
-                                <td class="text-wrap">{{ $job->description }}</td>
-                                <td class="text-wrap">{{ $job->company }}</td>
-                                <td>{{ $job->created_at }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>    
-                </div>
-                {{ $jobs->withQueryString()->onEachSide(2)->links() }}
-            </div>   
-        </div>
         <script src="/dist/js/chunk-vendors.js"></script>
         <script src="/dist/js/app.js"></script>
     </body>
