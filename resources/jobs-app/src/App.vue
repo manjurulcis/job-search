@@ -1,17 +1,22 @@
 <template>
-  <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <img alt="Vue logo" :src="url + '/img/logo.png'">
+  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
 </template>
 
-<script>
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component'
 import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
+@Options({
   components: {
     HelloWorld
+  },
+  props: {
+    url: String
   }
+})
+export default class App extends Vue {
+  url = '/dist'
 }
 </script>
 

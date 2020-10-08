@@ -8,13 +8,17 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "serve": "vue-cli-service serve",
-        "build": "cd resources/job-list-search && vue-cli-service build ",
-        "lint": "vue-cli-service lint"
+        "build": "cd resources/jobs-app && vue-cli-service build ",
+        "serve": "cd resources/jobs-app && vue-cli-service serve",
+        "test:unit": "cd resources/jobs-app && vue-cli-service test:unit",
+        "test:e2e": "cd resources/jobs-app && vue-cli-service test:e2e",
+        "lint": "cd resources/jobs-app && vue-cli-service lint"
     },
     "dependencies": {
         "core-js": "^3.6.5",
-        "vue": "^2.6.11"
+        "vue": "^3.0.0",
+        "vue-class-component": "^8.0.0-0",
+        "vuex": "^4.0.0-0"
     },
     "devDependencies": {
         "axios": "^0.19",
@@ -27,13 +31,29 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
+        "@types/chai": "^4.2.11",
+        "@types/mocha": "^5.2.4",
+        "@typescript-eslint/eslint-plugin": "^2.33.0",
+        "@typescript-eslint/parser": "^2.33.0",
         "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-e2e-cypress": "~4.5.0",
         "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-plugin-typescript": "~4.5.0",
+        "@vue/cli-plugin-unit-mocha": "~4.5.0",
+        "@vue/cli-plugin-vuex": "~4.5.0",
         "@vue/cli-service": "~4.5.0",
-        "babel-eslint": "^10.1.0",
+        "@vue/compiler-sfc": "^3.0.0",
+        "@vue/eslint-config-standard": "^5.1.2",
+        "@vue/eslint-config-typescript": "^5.0.2",
+        "@vue/test-utils": "^2.0.0-0",
+        "chai": "^4.1.2",
         "eslint": "^6.7.2",
-        "eslint-plugin-vue": "^6.2.2",
-        "vue-template-compiler": "^2.6.11"
+        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.0",
+        "eslint-plugin-vue": "^7.0.0-0",
+        "typescript": "~3.9.3"
     },
     "eslintConfig": {
         "root": true,
