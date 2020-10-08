@@ -13,6 +13,8 @@ abstract class TestCase extends BaseTestCase
     public function setUp(): void
     {
         parent::setUp();
-        Artisan::call('key:generate');
+        if (!env('APP_KEY')) {
+            Artisan::call('key:generate');
+        }
     }
 }
