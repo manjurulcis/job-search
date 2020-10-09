@@ -1,22 +1,33 @@
 <template>
   <img alt="Vue logo" :src="url + '/img/logo.png'">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <JobList @changeUserName="changeUserName($event)" msg="Welcome to Your Vue.js + TypeScript App"/>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import HelloWorld from './components/HelloWorld.vue'
+import JobList from './components/JobList.vue'
 
 @Options({
   components: {
-    HelloWorld
-  },
-  props: {
-    url: String
+    JobList
   }
 })
 export default class App extends Vue {
   url = '/dist'
+
+  jobs = []
+
+  created () {
+    console.log('created')
+  }
+
+  mounted () {
+    console.log('mounted')
+  }
+
+  changeUserName($event) {
+    console.log($event.value)
+  }
 }
 </script>
 
