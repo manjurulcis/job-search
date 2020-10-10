@@ -115,7 +115,7 @@ export default class JobList extends Vue {
       .catch(e => {
         console.log(e)
       })
-    return false  
+    return false
   }
 }
 </script>
