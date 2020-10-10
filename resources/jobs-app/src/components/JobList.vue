@@ -2,6 +2,10 @@
   <div class="container-fluid" v-if="jobs.length">
     <div class="row">
       <div class="col-6">
+        <h1>Available Jobs</h1>
+        <p>
+            Displaying {{totalDisplayJobsCount}} of {{ totalJobsCount }} job(s).
+        </p> 
         <ul class="pagination" v-if="paginationLinks && paginationLinks.length">
           <li
           v-for="link of paginationLinks"
@@ -10,7 +14,7 @@
             <a href="#" @click="goToPage(link.label)"><strong>{{link.label}}</strong></a>
           </li>
         </ul>
-        <a href="http://localhost" class="button">See Laravel Eloquoent Version</a>
+        <a href="http://localhost" class="button" style="clear: both; text-align:left">See Laravel Eloquoent Version</a>
       </div>
       <div class="col-3">
           <input type="text" name="search" v-model="search" maxlength="200" @blur="searchJobs()">
@@ -78,6 +82,8 @@ export default class JobList extends Vue {
   currentPage = 1
   direction = 'asc'
   sort_by = ''
+  totalDisplayJobsCount = 10
+  totalJobsCount = 0
 
   search = ''
 
@@ -110,6 +116,8 @@ export default class JobList extends Vue {
         this.jobs = response.data.data
         this.paginationLinks = response.data.links
         this.currentPage = response.data.current_page
+        this.totalJobsCount = response.data.total
+        this.totalDisplayJobsCount = response.data.per_page
         this.loading = false
       })
       .catch(e => {
