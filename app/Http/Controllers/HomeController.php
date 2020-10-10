@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Job;
 use Carbon\Carbon;
-use Facade\FlareClient\Http\Response;
 
 class HomeController extends Controller
 {
@@ -19,9 +18,12 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
+        $format = $request->input('format');
         $jobs = $query 
             ? Job::search($query, null, true)->sortable()->paginate(5) 
             : Job::sortable()->paginate(10);
+
+        if ($format == 'JSON') return response()->json($jobs);    
         return view('jobs', ['jobs' => $jobs]);
     }
 

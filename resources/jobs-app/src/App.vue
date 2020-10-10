@@ -1,6 +1,7 @@
 <template>
-  <img alt="Vue logo" :src="url + '/img/logo.png'">
-  <JobList @changeUserName="changeUserName($event)" msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+      <JobList jobs="jobs"/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -15,18 +16,8 @@ import JobList from './components/JobList.vue'
 export default class App extends Vue {
   url = '/dist'
 
-  jobs = []
-
   created () {
     console.log('created')
-  }
-
-  mounted () {
-    console.log('mounted')
-  }
-
-  changeUserName($event) {
-    console.log($event.value)
   }
 }
 </script>
