@@ -10,18 +10,33 @@
             <a href="#" @click="goToPage(link.label)"><strong>{{link.label}}</strong></a>
           </li>
         </ul>
+        <a href="http://localhost" class="button">See Laravel Eloquoent Version</a>
       </div>
-      <div class="col-4">
-          <input type="text" name="search" v-model="search" maxlength="200">
+      <div class="col-3">
+          <input type="text" name="search" v-model="search" maxlength="200" @blur="searchJobs()">
+      </div>
+
+      <div class="col-1">
+        <select v-model="sort_by" @change="searchJobs()">
+          <option disabled value="">Sort By</option>
+          <option value="Title">Title</option>
+          <option value="company">Company</option>
+          <option value="created_at">Date</option>
+        </select>
+      </div>
+
+      <div class="col-1">
+        <select v-model="direction" @change="searchJobs()">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
       </div>
 
       <div class="col-1">
         <button type="submit" class="btn btn-sm btn-primary" @click="searchJobs()"> Search</button>
       </div>
-
-      <div class="col-1">
-      </div>
       <div class="col-12">
+          <div v-if="loading" class="alert alert-warning">Processing...Please wait</div>
           <table class="table table-bordered table-hover">
               <thead>
                   <th>ID</th>
@@ -57,9 +72,12 @@ import axios from 'axios'
 @Options({})
 export default class JobList extends Vue {
   API_URL = 'http://localhost/?format=JSON'
+  loading = false
   jobs = []
   paginationLinks = []
   currentPage = 1
+  direction = 'asc'
+  sort_by = ''
 
   search = ''
 
@@ -74,25 +92,30 @@ export default class JobList extends Vue {
     let queryText = '&page=' + pageno
 
     if (this.search) queryText = queryText + '&search=' + this.search
+    if (this.sort_by) queryText = queryText + '&sort=' + this.sort_by + '&direction=' + this.direction
     this._jobQuery(queryText)
   }
 
   searchJobs () {
-    if (this.search === '') return false
-    this._jobQuery('&search=' + this.search)
+    let queryText = '&search=' + this.search
+    if (this.search === '') queryText = ''
+    this._jobQuery(queryText)
   }
 
   private _jobQuery (query: string) {
+    this.loading = true
     axios.get(this.API_URL + query)
       .then(response => {
         // JSON responses are automatically parsed.
         this.jobs = response.data.data
         this.paginationLinks = response.data.links
         this.currentPage = response.data.current_page
+        this.loading = false
       })
       .catch(e => {
         console.log(e)
       })
+    return false  
   }
 }
 </script>

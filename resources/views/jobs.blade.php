@@ -38,11 +38,12 @@
                 </div>
 
                 <div class="col-7">
-                <form style="display:inline-block" action="" method="GET">
-                        <input type="text" name="search" maxlength="200">
-                        @csrf
-                        <button type="submit" class="btn btn-sm btn-primary"> Search</button>
-                </form>
+                    <form style="display:inline-block" action="" method="GET">
+                            <input type="text" name="search" maxlength="200">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-primary"> Search</button>
+                    </form>
+                    <a href="http://localhost/jobswithvue" class="button">See VueJs Version</a>
                 </div>
             </div>  
             <div class="row">
