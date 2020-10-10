@@ -5,7 +5,7 @@
         <h1>Available Jobs</h1>
         <p>
             Displaying {{totalDisplayJobsCount}} of {{ totalJobsCount }} job(s).
-        </p> 
+        </p>
         <ul class="pagination" v-if="paginationLinks && paginationLinks.length">
           <li
           v-for="link of paginationLinks"
