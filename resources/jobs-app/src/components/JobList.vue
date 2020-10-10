@@ -1,17 +1,25 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" v-if="jobs.length">
     <div class="row">
       <div class="col-6">
-        <ul v-if="paginationLinks && paginationLinks.length">
+        <ul class="pagination" v-if="paginationLinks && paginationLinks.length">
           <li
           v-for="link of paginationLinks"
           :key="link.label"
-          v-bind:class="{ active: link.active, hidden: link.label == 'NEXT' || link.label == 'PREVIOUS' || !link.url }">
+          v-bind:class="{ active: link.active, hidden: !link.url }">
             <a href="#" @click="goToPage(link.label)"><strong>{{link.label}}</strong></a>
           </li>
         </ul>
       </div>
-      <div class="col-6">
+      <div class="col-4">
+          <input type="text" name="search" v-model="search" maxlength="200">
+      </div>
+
+      <div class="col-1">
+        <button type="submit" class="btn btn-sm btn-primary" @click="searchJobs()"> Search</button>
+      </div>
+
+      <div class="col-1">
       </div>
       <div class="col-12">
           <table class="table table-bordered table-hover">
@@ -43,33 +51,39 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
+import { Prop } from 'vue-property-decorator'
 import axios from 'axios'
 
 @Options({})
 export default class JobList extends Vue {
+  API_URL = 'http://localhost/?format=JSON'
   jobs = []
   paginationLinks = []
   currentPage = 1
 
+  search = ''
+
   mounted () {
-    this.getJobs()
+    this._jobQuery('')
   }
 
-  getJobs () {
-    axios.get('http://localhost/?format=JSON')
-      .then(response => {
-        // JSON responses are automatically parsed.
-        this.jobs = response.data.data
-        this.paginationLinks = response.data.links
-        this.currentPage = response.data.current_page
-      })
-      .catch(e => {
-        console.log(e)
-      })
+  goToPage (pageno: any) {
+    if (pageno === 'Next') pageno = this.currentPage + 1
+    if (pageno === 'Previous') pageno = this.currentPage - 1
+
+    let queryText = '&page=' + pageno
+
+    if (this.search) queryText = queryText + '&search=' + this.search
+    this._jobQuery(queryText)
   }
 
-  goToPage (pageno: number) {
-    axios.get('http://localhost/?format=JSON&page=' + pageno)
+  searchJobs () {
+    if (this.search === '') return false
+    this._jobQuery('&search=' + this.search)
+  }
+
+  private _jobQuery (query: string) {
+    axios.get(this.API_URL + query)
       .then(response => {
         // JSON responses are automatically parsed.
         this.jobs = response.data.data
@@ -91,6 +105,7 @@ h3 {
 ul {
   list-style-type: none;
   padding: 0;
+  text-align: left;
 }
 li {
   display: inline-block;
