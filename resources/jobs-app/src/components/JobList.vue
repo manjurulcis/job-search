@@ -2,7 +2,7 @@
   <div class="container-fluid" v-if="jobs.length">
     <div class="row">
       <div class="col-6">
-        <h1>Available Jobs</h1>
+        <h1 style="clear: both; text-align:left">Available Jobs</h1>
       </div>
       <div class="col-6">
         <a href="http://localhost" class="button" style="clear: both; text-align:left">See Laravel Eloquoent Version</a>
@@ -17,12 +17,12 @@
             <a href="#" @click="goToPage(link.label)"><strong>{{link.label}}</strong></a>
           </li>
         </ul>
-        <p>
+        <p style="clear: both; text-align:left">
             Displaying {{ (totalDisplayJobsCount * (currentPage - 1)) + 1 }} to {{ totalDisplayJobsCount * currentPage }} of {{ totalJobsCount }} job(s).
         </p>
       </div>
       <div class="col-3">
-          <input type="text" placeholder="Enter keyword..." name="search" v-model="search" maxlength="200" @blur="searchJobs()">
+          <input type="text" placeholder="Enter keyword..." name="search" v-model="search" maxlength="200" @blur="searchJobs()" style="width: 85%; float: right">
       </div>
 
       <div class="col-1">
