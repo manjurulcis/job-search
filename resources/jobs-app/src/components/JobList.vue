@@ -1,11 +1,16 @@
 <template>
   <div class="container-fluid" v-if="jobs.length">
     <div class="row">
-      <div class="col-6">
+      <div class="col-2">
         <h1>Available Jobs</h1>
+      </div>
+      <div class="col-10">
         <p>
-            Displaying {{totalDisplayJobsCount}} of {{ totalJobsCount }} job(s).
+            Displaying {{ (totalDisplayJobsCount * (currentPage - 1)) + 1 }} to {{ totalDisplayJobsCount * currentPage }} of {{ totalJobsCount }} job(s).
         </p>
+      </div>
+
+      <div class="col-6">
         <ul class="pagination" v-if="paginationLinks && paginationLinks.length">
           <li
           v-for="link of paginationLinks"
@@ -17,7 +22,7 @@
         <a href="http://localhost" class="button" style="clear: both; text-align:left">See Laravel Eloquoent Version</a>
       </div>
       <div class="col-3">
-          <input type="text" name="search" v-model="search" maxlength="200" @blur="searchJobs()">
+          <input type="text" placeholder="Enter keyword..." name="search" v-model="search" maxlength="200" @blur="searchJobs()">
       </div>
 
       <div class="col-1">
@@ -39,6 +44,7 @@
       <div class="col-1">
         <button type="submit" class="btn btn-sm btn-primary" @click="searchJobs()"> Search</button>
       </div>
+
       <div class="col-12">
           <div v-if="loading" class="alert alert-warning">Processing...Please wait</div>
           <table class="table table-bordered table-hover">
