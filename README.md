@@ -1,9 +1,9 @@
 
 # Job Board
-A pretty simplified Docker Compose workflow that sets up a LAMP network of containers for local Laravel development and testing. 
+A pretty simplified Docker Compose workflow that sets up a LAMP network of containers for local Laravel development and testing. This project was done using both VueJs and normal laravel eloquoent. 
 
 
-## Usage
+## How to run
 
 After cloning the repo copy environment file from .env.example `cp .env.example .env`
 To get started, make sure you have [Docker installed](https://docs.docker.com/docker-for-mac/install/) on the system, and then clone this repository and spin up the containers for the web server by running 
@@ -15,6 +15,7 @@ After that completes following are built for our web server, with their exposed 
 - **mysql** - `:3306`
 - **php** - `:9000`
 
+## Build Vue version
 Once build and successful running of the containers, run following command for the Vue Version
 `docker-compose run --rm npm run build`
 

@@ -1,7 +1,5 @@
 <template>
-  <div>
       <JobList />
-  </div>
 </template>
 
 <script lang="ts">
