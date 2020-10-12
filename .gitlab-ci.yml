@@ -65,7 +65,8 @@ npm:
    paths:
      - ./resources/jobs-app/node_modules/
  script:
-     - cd resources/jobs-app 
+     - npm install
+     - npm install -g @vue/cli
      - npm run build
  artifacts:
    expire_in: 1 month
