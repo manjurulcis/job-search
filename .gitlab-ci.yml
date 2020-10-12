@@ -1,4 +1,4 @@
-image: bitnami/laravel:firsttry
+image: bitnami/laravel
 
 #.init_ssh: &init_ssh |
 #  eval $(ssh-agent -s)
