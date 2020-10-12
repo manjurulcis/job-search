@@ -1,4 +1,4 @@
-image: edbizarro/gitlab-ci-pipeline-php:7.4
+image: alefesouza/php7-laravel-node-yarn
 
 #.init_ssh: &init_ssh |
 #  eval $(ssh-agent -s)
