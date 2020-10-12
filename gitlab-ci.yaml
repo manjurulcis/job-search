@@ -1,0 +1,111 @@
+image: haquemdmanzurul/laravel-gitlab-ci-cd:firsttry
+
+#.init_ssh: &init_ssh |
+#  eval $(ssh-agent -s)
+#  echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+#  mkdir -p ~/.ssh
+#  chmod 700 ~/.ssh
+#  echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+#
+#  # Replace the last line with the following lines if you'd rather
+#  # leave StrictHostKeyChecking enabled (replace yourdomain.com):
+#  #
+#  ssh-keyscan samplecicd.bitbytesoft.com >> ~/.ssh/known_hosts
+#  chmod 644 ~/.ssh/known_hosts
+###
+#
+#.change_file_permissions: &change_file_permissions |
+#  find . -type f -not -path "./vendor/*" -exec chmod 664 {} \;
+#  find . -type d -not -path "./vendor/*" -exec chmod 775 {} \;
+###
+
+
+#######
+# .dev_ssh: &dev_ssh |
+#   eval $(ssh-agent -s)
+#   echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+#   mkdir -p ~/.ssh
+#   chmod 700 ~/.ssh
+#   echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+#   rsync -R --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r -avzp ./ --ignore-times -e "ssh -p 8319" $SSH_USER@$SSH_HOST:$DEST_DEV
+#   ssh -p 8319 $SSH_USER@$SSH_HOST "cd /home/haquemdm/hmhship.bitbytesoft.com; rm app/Config/database.php;
+#   cp app/Config/database.php.default app/Config/database.php;
+#   composer install; cp -R Hmhship app/Vendor/;"
+####
+
+#######
+.prod_ssh: &prod_ssh |
+  eval $(ssh-agent -s)
+  echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add - > /dev/null
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+  echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  rsync -R --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r -avzp ./ --ignore-times -e "ssh" $SSH_USER_PROD@$SSH_HOST_PROD:$DEST_PROD
+  ssh  $SSH_USER_PROD@$SSH_HOST_PROD "cd /home/vu6g13m1buou/public_html/hmhship.com; composer install; cp app/Config/database.php.default app/Config/database.php; cp -R Hmhship app/Vendor/;"
+#ssh -p 8319 $SSH_USER@$SSH_HOST "cd /home/haquemdm/productioncicd; composer install" extra command format
+####
+composer:
+ stage: build
+ cache:
+   key: ${CI_COMMIT_REF_SLUG}-composer
+   paths:
+   - vendor/
+ script:
+ - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+ - cp app/Config/database.php.default app/Config/database.php
+ artifacts:
+   expire_in: 1 month
+   paths:
+   - vendor/
+   - .env
+
+npm:
+ stage: build
+ cache:
+   key: ${CI_COMMIT_REF_SLUG}-npm
+   paths:
+     - node_modules/
+ script:
+     - npm install
+     - npm run build
+ artifacts:
+   expire_in: 1 month
+   paths:
+     - node_modules/
+     - public/css/
+     - public/js/
+#
+#codestyle:
+#  stage: test
+#  dependencies: []
+#  script:
+#    - phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+
+phpunit:
+ stage: test
+ dependencies:
+ - composer
+ script:
+ - phpunit --coverage-text --colors=never
+
+# staging:
+#   stage: deploy
+#   script:
+#   - *dev_ssh
+#   environment:
+#     name: staging
+#     url: https://hmhship.bitbytesoft.com
+#   when: manual
+#   only:
+#   - master
+
+production:
+  stage: deploy
+  script:
+  - *prod_ssh
+  environment:
+    name: production
+    url: https://jobboard.mdmanzurul.pro
+  when: manual
+  only:
+  - master

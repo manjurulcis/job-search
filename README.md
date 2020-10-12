@@ -7,7 +7,7 @@ A pretty simplified Docker Compose workflow that sets up a LAMP network of conta
 
 After cloning the repo copy environment file from .env.example `cp .env.example .env`
 To get started, make sure you have [Docker installed](https://docs.docker.com/docker-for-mac/install/) on the system, and then clone this repository and spin up the containers for the web server by running 
-`docker-compose up -d --build`.
+- `docker-compose up -d --build`.
 
 After that completes following are built for our web server, with their exposed ports detailed:
 
@@ -17,7 +17,7 @@ After that completes following are built for our web server, with their exposed 
 
 ## Build Vue version
 Once build and successful running of the containers, run following command for the Vue Version
-`docker-compose run --rm npm run build`
+- `docker-compose run --rm npm run build`
 
 ## Database Migration
 After copy the environment and docker compose successfully built and running, run artisan for database migration
@@ -38,6 +38,7 @@ Besides these other containers can be accessible using below commands
 
 ## Tests setup and Run
 To run automated test we will use sqlite db, create an sqlite database named 'test.sqlite' inside database folder `database/test.sqlite` 
+or run this command to create one `docker-compose exec app touch database/test.sqlite` 
 or create the database name same as you define in `.env.testing`
 Run the following command to run tests 
 - `docker-compose exec app composer test` 

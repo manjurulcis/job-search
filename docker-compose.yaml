@@ -80,6 +80,7 @@ services:
 networks:
   app-network:
     driver: bridge
+    
 #Volumes
 volumes:
   dbdata:
