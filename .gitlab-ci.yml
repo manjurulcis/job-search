@@ -1,4 +1,4 @@
-image: haquemdmanzurul/laravel-gitlab-ci-cd:firsttry
+image: bitnami/laravel:firsttry
 
 #.init_ssh: &init_ssh |
 #  eval $(ssh-agent -s)
@@ -63,13 +63,14 @@ npm:
  cache:
    key: ${CI_COMMIT_REF_SLUG}-npm
    paths:
-     - esources/job-app/node_modules/
+     - ./resources/jobs-app/node_modules/
  script:
-     - cd resources/job-app && npm run build
+     - cd resources/jobs-app 
+     - npm run build
  artifacts:
    expire_in: 1 month
    paths:
-     - node_modules/
+     - resources/jobs-app/node_modules/
      - public/css/
      - public/js/
 #
