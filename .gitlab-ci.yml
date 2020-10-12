@@ -41,8 +41,9 @@ image: edbizarro/gitlab-ci-pipeline-php:7.4
   chmod 700 ~/.ssh
   echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   rsync -R --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r -avzp ./ --ignore-times -e "ssh" $SSH_USER_PROD@$SSH_HOST_PROD:$DEST_PROD
-  ssh  $SSH_USER_PROD@$SSH_HOST_PROD "cd /home/vu6g13m1buou/public_html/hmhship.com; composer install; cp app/Config/database.php.default app/Config/database.php; cp -R Hmhship app/Vendor/;"
-#ssh -p 8319 $SSH_USER@$SSH_HOST "cd /home/haquemdm/productioncicd; composer install" extra command format
+  ssh  $SSH_USER_PROD@$SSH_HOST_PROD "cd /home/mdmanzu/jobboard.mdmanzurul; composer install;"
+####
+
 ####
 composer:
  stage: build
@@ -51,13 +52,16 @@ composer:
    paths:
    - vendor/
  script:
- - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+   - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+   - cp .env.example .env
  artifacts:
    expire_in: 1 month
    paths:
    - vendor/
    - .env
+####
 
+####
 npm:
  stage: build
  cache:
@@ -72,6 +76,8 @@ npm:
    paths:
      - resources/jobs-app/node_modules/
      - public/dist/
+####
+    
 #
 #codestyle:
 #  stage: test
@@ -84,7 +90,8 @@ phpunit:
  dependencies:
  - composer
  script:
- - phpunit --coverage-text --colors=never
+  - touch database/test.sqlite
+  - composer test
 
 # staging:
 #   stage: deploy
