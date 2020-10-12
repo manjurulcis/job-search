@@ -1,4 +1,4 @@
-image: alefesouza/php7-laravel-node-yarn
+image: edbizarro/gitlab-ci-pipeline-php:7.4
 
 #.init_ssh: &init_ssh |
 #  eval $(ssh-agent -s)
@@ -66,14 +66,12 @@ npm:
      - ./resources/jobs-app/node_modules/
  script:
      - npm install
-     - npm install -g @vue/cli
      - npm run build
  artifacts:
    expire_in: 1 month
    paths:
      - resources/jobs-app/node_modules/
-     - public/css/
-     - public/js/
+     - public/dist/
 #
 #codestyle:
 #  stage: test
