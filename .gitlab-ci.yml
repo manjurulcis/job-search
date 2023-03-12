@@ -67,7 +67,7 @@ npm:
  cache:
    key: ${CI_COMMIT_REF_SLUG}-npm
    paths:
-     - ./resources/jobs-app/node_modules/
+     - resources/jobs-app/node_modules/
  script:
      - npm install
      - npm run build

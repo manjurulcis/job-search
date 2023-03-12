@@ -49,3 +49,6 @@ Run the following command to run tests
 
 ## Reference
 API used for job details `https://paikat.te-palvelut.fi/tpt-api/tyopaikat?englanti=true`
+
+## Inspired and Supported By:
+[https://bitbytesoft.com](https://bitbytesoft.com)
