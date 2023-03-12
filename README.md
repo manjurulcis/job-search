@@ -52,3 +52,4 @@ API used for job details `https://paikat.te-palvelut.fi/tpt-api/tyopaikat?englan
 
 ## Inspired and Supported By:
 [https://bitbytesoft.com](https://bitbytesoft.com)
+[https://bitbyhost.com](https://bitbyhost.com)
